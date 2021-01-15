@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\packages\microsoft.vssdk.buildtools\15.0.26201\build\Microsoft.VSSDK.BuildTools.props" Condition="Exists('..\..\packages\microsoft.vssdk.buildtools\15.0.26201\build\Microsoft.VSSDK.BuildTools.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
+    <TargetFrameworks>net472;net45</TargetFrameworks>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{94756FEB-1F64-411D-A18E-81B5158F776A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Xamarin.Android.Sdk</RootNamespace>
     <AssemblyName>Xamarin.Android.Sdk</AssemblyName>
@@ -23,10 +23,12 @@
     <_BuildVsix Condition=" '$(_BuildVsix)' == '' ">False</_BuildVsix>
     <ExtensionInstallationFolder>Xamarin\Xamarin.Android.Sdk</ExtensionInstallationFolder>
     <OutputPath>bin\$(Configuration)</OutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
+
+  <Import Project="..\..\packages\microsoft.vssdk.buildtools\15.0.26201\build\Microsoft.VSSDK.BuildTools.props" Condition="Exists('..\..\packages\microsoft.vssdk.buildtools\15.0.26201\build\Microsoft.VSSDK.BuildTools.props')" />
   <Import Project="..\..\Configuration.props" />
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' " />
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' " />
+
   <ItemGroup>
     <Compile Include="AndroidSdkPackage.cs" />
     <Content Include="Resources\AndroidSdkPackage.ico">
