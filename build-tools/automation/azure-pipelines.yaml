@@ -311,6 +311,13 @@ stages:
       workingDirectory: $(System.DefaultWorkingDirectory)/xamarin-android
       displayName: make prepare-external-git-dependencies
 
+    - script: which msbuild
+      condition: always()
+
+    - script: msbuild /binaryLogger:"bin/BuildRelease/bootstrap-restore-againt.binlog" /p:Configuration=Release build-tools/xaprepare/xaprepare.sln /t:Restore
+      workingDirectory: $(System.DefaultWorkingDirectory)/xamarin-android
+      condition: always()
+
     - script: make jenkins V=1 PREPARE_CI=1 PREPARE_AUTOPROVISION=1 CONFIGURATION=$(XA.Build.Configuration)
       workingDirectory: $(System.DefaultWorkingDirectory)/xamarin-android
       displayName: make jenkins
@@ -340,7 +347,7 @@ stages:
 
     - template: yaml-templates/upload-results.yaml
       parameters:
-        solution: $(System.DefaultWorkingDirectory)/build-tools/Xamarin.Android.Tools.BootstrapTasks/Xamarin.Android.Tools.BootstrapTasks.csproj
+        solution: $(System.DefaultWorkingDirectory)/xamarin-android/build-tools/Xamarin.Android.Tools.BootstrapTasks/Xamarin.Android.Tools.BootstrapTasks.csproj
         artifactName: Build Results - Linux
 
 - stage: smoke_tests
